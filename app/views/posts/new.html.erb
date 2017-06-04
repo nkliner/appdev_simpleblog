@@ -1,0 +1,55 @@
+<!-- Validation failure messages -->
+<% if @post.errors.any? %>
+  <% @post.errors.full_messages.each do |message| %>
+    <div class="alert alert-dismissable alert-danger">
+      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+      <%= message %>
+    </div>
+  <% end %>
+<% end %>
+
+<div class="page-header">
+  <h3>Add Post</h3>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <form action="/create_post" method="post">
+      <!-- Hidden input for authenticity token to protect from forgery -->
+      <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+
+      <!-- Label and input for title -->
+      <div class="form-group">
+        <label for="title" class="control-label">
+          Title
+        </label>
+
+        <textarea id="title" name="title" placeholder="Title" class="form-control" rows="3"><%= @post.title %></textarea>
+      </div>
+
+      <!-- Label and input for entry -->
+      <div class="form-group">
+        <label for="entry" class="control-label">
+          Entry
+        </label>
+
+        <textarea id="entry" name="entry" placeholder="Entry" class="form-control" rows="3"><%= @post.entry %></textarea>
+      </div>
+
+      <!-- Label and input for user_id -->
+      <div class="form-group">
+        <label for="user_id" class="control-label">
+          User
+        </label>
+
+        <input type="text" id="user_id" name="user_id" placeholder="User" class="form-control" value="<%= @post.user_id %>">
+      </div>
+
+      <button class="btn btn-success">
+        Create Post
+      </button>
+      or
+      <a href="/posts">Cancel</a>
+    </form>
+  </div>
+</div>
